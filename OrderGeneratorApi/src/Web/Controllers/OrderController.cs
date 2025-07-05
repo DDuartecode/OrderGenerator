@@ -28,8 +28,6 @@ public class OrderController : ControllerBase
     {
         try
         {
-            order.IsValid();
-
             _logger.LogInformation($"Request receveid for send the order: {order.Id}");
             await _createOrderUseCase.HandleAsync(order);
         }

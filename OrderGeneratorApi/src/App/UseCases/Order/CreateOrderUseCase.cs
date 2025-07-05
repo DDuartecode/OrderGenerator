@@ -14,10 +14,7 @@ public class CreateOrderUseCase
 
     public async Task HandleAsync(OrderEntity order)
     {
-        if (order == null)
-        {
-            throw new ArgumentNullException(nameof(order), "Order cannot be null");
-        }
+        order.IsValid();
 
         await _orderRepository.SendOrderAsync(order);
     }

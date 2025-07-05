@@ -1,12 +1,14 @@
+using OrderGeneratorApi.Domain.Enums;
+
 namespace OrderGeneratorApi.Domain.Entities;
 
 public class OrderEntity
 {
-    public Guid Id { get; set; } = Guid.NewGuid(); //TODO:Guid informado inválido continua retornando erro não tratado
+    public Guid Id { get; } = Guid.NewGuid();
     public List<ProductEntity> Products { get; set; } = new List<ProductEntity>();
     public DateTime OrderDate { get; set; } = DateTime.UtcNow;
     public double TotalAmount { get; set; } = 0.0;
-    public string Status { get; set; } = "Pending";
+    public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
     public bool IsValid()
     {
