@@ -1,7 +1,8 @@
+using Serilog;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OrderGeneratorApi.App.UseCases.Order;
 using OrderGeneratorApi.Domain.Entities;
+using OrderGeneratorApi.Domain.Interfaces;
 
 namespace OrderGeneratorApi.Web.Controllers;
 
@@ -25,15 +26,26 @@ public class OrderController : ControllerBase
     [ApiVersion("1.0")]
     public async Task<IActionResult> CreateOrder([FromBody] OrderEntity order)
     {
-        if (order == null)
+        try
         {
-            _logger.LogError("Order cannot be null");
-            return BadRequest("Order cannot be null");
+            order.validate();
+
+            _logger.LogInformation($"Request receveid for send the order: {order.Id}");
+            await _createOrderUseCase.HandleAsync(order);
+        }
+        catch (ArgumentNullException ex)
+        {
+            _logger.LogError($"Failed to send order {order.Id} for processing - Message: {ex.Message}", ex);
+            return BadRequest($"Failed to send order {order.Id} for processing - Message: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Unespected error for sending order {order.Id}: {ex.Message}", ex);
+            return BadRequest($"Failed to send order {order.Id}: {ex.Message}");
         }
 
-        await _createOrderUseCase.HandleAsync(order);
 
-        _logger.LogInformation($"Pedido {order.Id} enviado com sucesso");
-        return Ok($"Pedido {order.Id} enviado com sucesso");
+        _logger.LogInformation($"Order {order.Id} sent for processing successfully");
+        return Ok($"Order {order.Id} sent for processing successfully");
     }
 }
