@@ -12,15 +12,13 @@ public class OrderEntity
 
     public bool IsValid()
     {
-        if (Products.Count <= 0)
-        {
+        if (Products.Count <= 0) {
             throw new ArgumentNullException(nameof(Products), "Order must have at least one product.");
         }
 
         Products.ForEach(product => product.IsValid());
 
-        if (TotalAmount <= 0)
-        {
+        if (TotalAmount <= 0) {
             throw new ArgumentOutOfRangeException(nameof(TotalAmount), "Total amount must be greater than zero.");
         }
 

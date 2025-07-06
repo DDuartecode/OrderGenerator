@@ -6,8 +6,7 @@ public class ProductEntity
 
     public bool IsValid()
     {
-        if (Id == Guid.Empty)
-        {
+        if (Id == Guid.Empty) {
             throw new ArgumentNullException(nameof(Id), "Product ID cannot be empty.");
         }
 

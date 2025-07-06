@@ -1,6 +1,7 @@
 using OrderGeneratorApi.Domain.Interfaces;
 using OrderGeneratorApi.Infra.Queues.Order;
 using OrderGeneratorApi.App.UseCases.Order;
+using OrderGeneratorApi.Infra.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -10,6 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Configurações do RabbitMQ
+builder.Services.Configure<RabbitMqSettings>(
+    builder.Configuration.GetSection("RabbitMqSettings")
+);
 
 // Buindings Interfaces, Implementações e UseCases
 builder.Services.AddScoped<IOrder, OrderQueue>();
