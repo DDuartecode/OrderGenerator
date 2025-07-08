@@ -5,15 +5,17 @@ using Xunit;
 
 namespace OrderGeneratorApi.Tests.Domain
 {
-    public class ProductEntityTests
+    public class ProductOrderEntityTests
     {
         [Fact]
         public void IsValid_ShouldReturnTrueIfProductIsValid()
         {
             // Arrange
-            var product = new ProductEntity
+            var product = new ProductOrderEntity
             {
                 Id = Guid.NewGuid(),
+                Quantity = 1,
+                Price = 10.0
             };
 
             // Act
@@ -27,9 +29,11 @@ namespace OrderGeneratorApi.Tests.Domain
         public void IsValid_ShouldThrowArgumentNullExceptionIfIdIsNullOrEmpty()
         {
             // Arrange
-            var product = new ProductEntity
+            var product = new ProductOrderEntity
             {
                 Id = Guid.Empty,
+                Quantity = 1,
+                Price = 10.0
             };
 
             // Act & Assert

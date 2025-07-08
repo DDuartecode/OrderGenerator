@@ -14,9 +14,13 @@ namespace OrderGeneratorApi.Tests.Domain
             // Arrange
             var order = new OrderEntity
             {
-                Products = new List<ProductEntity>
+                Products = new List<ProductOrderEntity>
                 {
-                    new ProductEntity { Id = Guid.NewGuid() },
+                    new ProductOrderEntity { 
+                        Id = Guid.NewGuid(),
+                        Quantity = 1,
+                        Price = 10.0
+                    },
                 },
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = 10.0,
@@ -36,7 +40,7 @@ namespace OrderGeneratorApi.Tests.Domain
             // Arrange
             var order = new OrderEntity
             {
-                Products = new List<ProductEntity>(),
+                Products = new List<ProductOrderEntity>(),
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = 10.0,
                 Status = OrderStatus.Pending
@@ -52,9 +56,13 @@ namespace OrderGeneratorApi.Tests.Domain
             // Arrange
             var order = new OrderEntity
             {
-                Products = new List<ProductEntity>
+                Products = new List<ProductOrderEntity>
                 {
-                    new ProductEntity { Id = Guid.NewGuid() },
+                    new ProductOrderEntity { 
+                        Id = Guid.NewGuid(),
+                        Quantity = 1,
+                        Price = 10.0
+                    },
                 },
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = 0.0,
@@ -71,10 +79,18 @@ namespace OrderGeneratorApi.Tests.Domain
             // Arrange
             var order = new OrderEntity
             {
-                Products = new List<ProductEntity>
+                Products = new List<ProductOrderEntity>
                 {
-                    new ProductEntity { Id = Guid.NewGuid() },
-                    new ProductEntity { Id = Guid.Empty } // Invalid product
+                    new ProductOrderEntity {
+                        Id = Guid.NewGuid(),
+                        Quantity = 1,
+                        Price = 10.0
+                    },
+                    new ProductOrderEntity {
+                        Id = Guid.Empty,
+                        Quantity = 1,
+                        Price = 10.0
+                    } // Invalid product
                 },
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = 10.0,

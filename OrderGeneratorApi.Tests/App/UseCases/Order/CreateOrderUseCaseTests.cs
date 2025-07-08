@@ -26,9 +26,13 @@ namespace OrderGeneratorApi.Tests.App.UseCases.Order
             // Arrange
             var order = new OrderEntity
             {
-                Products = new List<ProductEntity>
+                Products = new List<ProductOrderEntity>
                 {
-                    new ProductEntity { Id = Guid.NewGuid() }
+                    new ProductOrderEntity { 
+                        Id = Guid.NewGuid(),
+                        Quantity = 1,
+                        Price = 10.0
+                    }
                 },
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = 100.0,
@@ -50,7 +54,7 @@ namespace OrderGeneratorApi.Tests.App.UseCases.Order
             // Arrange
             var order = new OrderEntity
             {
-                Products = new List<ProductEntity>(),
+                Products = new List<ProductOrderEntity>(),
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = 100.0,
                 Status = OrderStatus.Pending

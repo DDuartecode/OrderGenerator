@@ -5,7 +5,7 @@ namespace OrderGeneratorApi.Domain.Entities;
 public class OrderEntity
 {
     public Guid Id { get; } = Guid.NewGuid();
-    public List<ProductEntity> Products { get; set; } = new List<ProductEntity>();
+    public List<ProductOrderEntity> Products { get; set; } = new List<ProductOrderEntity>();
     public DateTime OrderDate { get; set; } = DateTime.UtcNow;
     public double TotalAmount { get; set; } = 0.0;
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
