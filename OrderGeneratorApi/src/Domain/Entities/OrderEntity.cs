@@ -16,7 +16,10 @@ public class OrderEntity
             throw new ArgumentNullException(nameof(Products), "Order must have at least one product.");
         }
 
-        Products.ForEach(product => product.IsValid());
+        Products.ForEach(product =>{
+            product.OrderId = this.Id;
+            product.IsValid();
+        });
 
         if (TotalAmount <= 0) {
             throw new ArgumentOutOfRangeException(nameof(TotalAmount), "Total amount must be greater than zero.");

@@ -17,7 +17,7 @@ namespace OrderGeneratorApi.Tests.Domain
                 Products = new List<ProductOrderEntity>
                 {
                     new ProductOrderEntity { 
-                        Id = Guid.NewGuid(),
+                        ProductId = Guid.NewGuid(),
                         Quantity = 1,
                         Price = 10.0
                     },
@@ -59,7 +59,7 @@ namespace OrderGeneratorApi.Tests.Domain
                 Products = new List<ProductOrderEntity>
                 {
                     new ProductOrderEntity { 
-                        Id = Guid.NewGuid(),
+                        ProductId = Guid.NewGuid(),
                         Quantity = 1,
                         Price = 10.0
                     },
@@ -82,12 +82,12 @@ namespace OrderGeneratorApi.Tests.Domain
                 Products = new List<ProductOrderEntity>
                 {
                     new ProductOrderEntity {
-                        Id = Guid.NewGuid(),
+                        ProductId = Guid.NewGuid(),
                         Quantity = 1,
                         Price = 10.0
                     },
                     new ProductOrderEntity {
-                        Id = Guid.Empty,
+                        ProductId = Guid.Empty,
                         Quantity = 1,
                         Price = 10.0
                     } // Invalid product

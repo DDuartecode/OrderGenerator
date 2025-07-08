@@ -29,7 +29,7 @@ namespace OrderGeneratorApi.Tests.App.UseCases.Order
                 Products = new List<ProductOrderEntity>
                 {
                     new ProductOrderEntity { 
-                        Id = Guid.NewGuid(),
+                        ProductId = Guid.NewGuid(),
                         Quantity = 1,
                         Price = 10.0
                     }

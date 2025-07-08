@@ -13,7 +13,8 @@ namespace OrderGeneratorApi.Tests.Domain
             // Arrange
             var product = new ProductOrderEntity
             {
-                Id = Guid.NewGuid(),
+                OrderId = Guid.NewGuid(),
+                ProductId = Guid.NewGuid(),
                 Quantity = 1,
                 Price = 10.0
             };
@@ -31,7 +32,8 @@ namespace OrderGeneratorApi.Tests.Domain
             // Arrange
             var product = new ProductOrderEntity
             {
-                Id = Guid.Empty,
+                OrderId = Guid.Empty,
+                ProductId = Guid.NewGuid(),
                 Quantity = 1,
                 Price = 10.0
             };
