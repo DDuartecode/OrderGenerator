@@ -1,11 +1,13 @@
 using Serilog;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using OrderGeneratorApi.App.UseCases.Order;
 using OrderGeneratorApi.Domain.Entities;
 using OrderGeneratorApi.Domain.Interfaces;
 
 namespace OrderGeneratorApi.Web.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
 public class OrderController : ControllerBase

@@ -1,3 +1,7 @@
+using System.Text;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using OrderGeneratorApi.Domain.Interfaces;
 using OrderGeneratorApi.Infra.Queues.Order;
 using OrderGeneratorApi.App.UseCases.Order;
@@ -11,6 +15,33 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Autorização
+var publicKey = File.ReadAllText("./oauth/keys/oauth-public.key");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new RsaSecurityKey(LoadRsaPublicKey(publicKey))
+    };
+});
+
+static RSA LoadRsaPublicKey(string publicKeyPem)
+{
+    var rsa = RSA.Create();
+    rsa.ImportFromPem(publicKeyPem.ToCharArray());
+    return rsa;
+}
 
 // Configurações do RabbitMQ
 builder.Services.Configure<RabbitMqSettings>(
@@ -52,6 +83,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 //app.UseHttpsRedirection();
 
