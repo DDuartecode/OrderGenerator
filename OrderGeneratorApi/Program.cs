@@ -32,6 +32,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
+        ClockSkew = TimeSpan.Zero,
         IssuerSigningKey = new RsaSecurityKey(LoadRsaPublicKey(publicKey))
     };
 });
