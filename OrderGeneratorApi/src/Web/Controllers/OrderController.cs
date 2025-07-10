@@ -40,8 +40,8 @@ public class OrderController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Unespected error for sending order {order.Id}: {ex.Message}", ex);
-            return BadRequest($"Unespected error for sending order {order.Id}");
+            _logger.LogError($"Unexpected error for sending order {order.Id}: {ex.Message}", ex);
+            return BadRequest($"Unexpected error for sending order {order.Id}");
         }
 
 
